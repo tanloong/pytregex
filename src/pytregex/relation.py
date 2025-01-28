@@ -428,8 +428,8 @@ class HEADED_BY(AbstractRelation):
     hf = CollinsHeadFinder()
 
     @classmethod
-    def satisfies(cls, t1: "Tree", t2: "Tree", hf: Optional["HeadFinder"] = None) -> bool:
-        return HEADS.satisfies(t2, t1, hf)
+    def satisfies(cls, t1: "Tree", t2: "Tree", headFinder: Optional["HeadFinder"] = None) -> bool:
+        return HEADS.satisfies(t2, t1, headFinder)
 
     @classmethod
     def searchNodeIterator(

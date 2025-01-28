@@ -1,7 +1,7 @@
 ![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/tanloong/pytregex/refs/heads/master/pyproject.toml)
 [![license](https://img.shields.io/github/license/tanloong/pytregex)](https://github.com/tanloong/pytregex/blob/master/LICENSE)
 
-[Tregex](https://nlp.stanford.edu/software/tregex.html) is the Java program for identifying patterns in constituency trees. PyTregex is a Python implementation of Tregex.
+[Tregex](https://nlp.stanford.edu/software/tregex.html) is the Java program for identifying patterns in constituency trees. PyTregex provides similar functionality in Python.
 
 ## Usage
 
@@ -72,28 +72,27 @@ See [tests](tests/test_tregex.py) for more examples.
 Tregex is whitespace-sensitive, it distinguishes between `|` and `␣|␣`. PyTregex ignores whitespace and has different symbols taking the place of `␣|␣`.
 
 <table>
-<style> table tr:nth-child(odd), table tr:nth-child(even) { background-color: transparent !important; } </style>
-<tr> <th></th> <th style="vertical-align: middle; text-align: center">Tregex</th> <th style="vertical-align: middle; text-align: center">PyTregex</th> </tr>
+<tr> <th></th> <th style="text-align: center">Tregex</th> <th style="text-align: center">PyTregex</th> </tr>
 <tr>
-  <td rowspan="2" style="vertical-align: middle; text-align: left">node disjunction</td>
-  <td rowspan="2" style="vertical-align: middle; text-align: center"><code>A|B</code></td>
-  <td style="vertical-align: middle; text-align: center"><code>A|B</code></td>
-</tr> <tr> <td style="vertical-align: middle; text-align: center"><code>A␣|␣B</code></td> </tr>
+  <td rowspan="2" style="text-align: left">node disjunction</td>
+  <td rowspan="2" style="text-align: center"><code>A|B</code></td>
+  <td style="text-align: center"><code>A|B</code></td>
+</tr> <tr> <td style="text-align: center"><code>A␣|␣B</code></td> </tr>
 <tr>
-  <td rowspan="2" style="vertical-align: middle; text-align: left">condition disjunction</td>
-  <td rowspan="2" style="vertical-align: middle; text-align: center"><code>A&lt;B␣|␣&lt;C</code></td>
-  <td style="vertical-align: middle; text-align: center"><code>A&lt;B␣||␣&lt;C</code></td>
-</tr> <tr> <td style="vertical-align: middle; text-align: center"><code>A&lt;B||&lt;C</code></td> </tr>
+  <td rowspan="2" style="text-align: left">condition disjunction</td>
+  <td rowspan="2" style="text-align: center"><code>A&lt;B␣|␣&lt;C</code></td>
+  <td style="text-align: center"><code>A&lt;B␣||␣&lt;C</code></td>
+</tr> <tr> <td style="text-align: center"><code>A&lt;B||&lt;C</code></td> </tr>
 <tr>
-  <td style="vertical-align: middle; text-align: left">expression disjunction</td>
-  <td style="vertical-align: middle; text-align: center"><code>A␣|␣B</code></td>
-  <td style="vertical-align: middle; text-align: center">N/A</td>
+  <td style="text-align: left">expression disjunction</td>
+  <td style="text-align: center"><code>A␣|␣B</code></td>
+  <td style="text-align: center">N/A</td>
 </tr>
 <tr>
-  <td rowspan="2" style="vertical-align: middle; text-align: left">expression separation</td>
-  <td rowspan="2" style="vertical-align: middle; text-align: center">N/A</td>
-  <td style="vertical-align: middle; text-align: center"><code>A;B</code></td>
-</tr> <tr> <td style="vertical-align: middle; text-align: center"><code>A␣;␣B</code></td> </tr>
+  <td rowspan="2" style="text-align: left">expression separation</td>
+  <td rowspan="2" style="text-align: center">N/A</td>
+  <td style="text-align: center"><code>A;B</code></td>
+</tr> <tr> <td style="text-align: center"><code>A␣;␣B</code></td> </tr>
 </table>
 
 In the table above the difference between expression disjunction and expression separation is whether "expressions stop evaluating as soon as the result is known." For example, in Tregex `NP=a | NNP=b` if `NP` matches, `b` will not be assigned even if there is an `NNP` in the tree, while in PyTregex `NP=a ; NNP=b` assigns `b` as long as `NNP` is found regardless of whether `NP` matches.

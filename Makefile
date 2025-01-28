@@ -14,13 +14,14 @@ clean:
 	uv pip uninstall pytregex || true
 
 build:
-	python setup.py sdist bdist_wheel
+	make clean
+	uv build
 
 release:
 	python -m twine upload dist/*
 
 install:
-	python setup.py install
+	uv pip install .
 
 test:
 	python -m unittest

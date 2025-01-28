@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import logging
 import re
 from abc import ABC, abstractmethod
 from collections.abc import Generator, Iterable, Iterator
@@ -175,6 +174,7 @@ class NodeDescriptions:
             ret = list(ret)
             backref_table[self.name].store_nodes(ret)
         yield from ret
+
 
 class NODE_OP(ABC):
     @classmethod
