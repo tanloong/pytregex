@@ -56,21 +56,21 @@ class TregexUI:
         pattern_parser.add_argument(
             "--help",
             action="help",
-            help="Show this message and exit.",
+            help="show this message and exit.",
         )
         pattern_parser.add_argument(
             "-filter",
             action="store_true",
             dest="is_stdin",
             default=False,
-            help="Read tree input from stdin.",
+            help="read tree input from stdin.",
         )
         pattern_parser.add_argument(
             "-C",
             action="store_true",
             dest="is_count",
             default=False,
-            help="Suppresses printing of matches, so only the number of matches is printed.",
+            help="suppress printing of matches, so only the number of matches is printed.",
         )
         pattern_parser.add_argument(
             "-h",
@@ -79,7 +79,7 @@ class TregexUI:
             nargs="+",
             dest="handles",
             help=(
-                "For each node-handle specified, the node matched and given that handle will be"
+                "for each node-handle specified, the node matched and given that handle will be"
                 " printed. Multiple nodes can be printed by using this option multiple times on"
                 " a single command line."
             ),
@@ -88,7 +88,7 @@ class TregexUI:
             "--version",
             action="store_true",
             default=False,
-            help="Show version and exit.",
+            help="show version and exit.",
         )
 
         self.__add_log_levels(pattern_parser)
