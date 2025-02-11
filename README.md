@@ -1,3 +1,4 @@
+[coverage](https://img.shields.io/codecov/c/github/tanloong/pytregex)](https://codecov.io/gh/tanloong/pytregex)
 ![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml?tomlFilePath=https://raw.githubusercontent.com/tanloong/pytregex/refs/heads/master/pyproject.toml)
 [![license](https://img.shields.io/github/license/tanloong/pytregex)](https://github.com/tanloong/pytregex/blob/master/LICENSE)
 
