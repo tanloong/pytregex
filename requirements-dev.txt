@@ -2,6 +2,7 @@
 setuptools
 wheel
 twine
+build
 
 # Lint & Coverage
 black
