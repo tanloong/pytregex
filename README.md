@@ -50,9 +50,9 @@ $ python -m pytregex pprint '(NP(DT The)(NN battery)(NN plant))'
 ```python
 from pytregex.tregex import TregexPattern
 
-tre = TregexPattern("NP < NN=a")
-matches = tre.findall("(NP(DT The)(NN battery)(NN plant))")
-handles = tre.get_nodes("a")
+p = TregexPattern("NP < NN=a")
+matches = p.findall("(NP(DT The)(NN battery)(NN plant))")
+handles = p.get_nodes("a")
 print("matches nodes:\n{}\n".format("\n".join(str(m) for m in matches)))
 print("named nodes:\n{}".format("\n".join(str(h) for h in handles)))
 
@@ -106,12 +106,12 @@ In the table above the difference between expression disjunction and expression 
 $ tree='(NP NP , NP ,)'
 $ pattern='(@NP <, (@NP $+ (/,/ $+ (@NP $+ /,/=comma))) <- =comma)' 
 
-$ echo "$tree" | tregex.sh "$pattern" -filter -s 2>/dev/null
+$ echo "$tree" | java edu.stanford.nlp.trees.tregex.TregexPattern "$pattern" -filter -s 2>/dev/null
 # (NP NP , NP ,)
 
 $ echo "$tree" | python -m pytregex pattern "$pattern" -filter
 # (@NP <, (@NP $+ (/,/ $+ (@NP $+ /,/=comma))) <- =comma)
-#                                              ˄
+#                                                 ˄
 # Parsing error at token '='
 ```
 
@@ -125,7 +125,7 @@ PyTregex currently has only one HeadFinder which is for English. If your pattern
 $ tree='(SBAR (WHNP-11 (WP who)) (S (NP-SBJ (-NONE- *T*-11)) (VP (VBD resigned))))' 
 $ pattern='@SBAR < /^WH.*-([0-9]+)$/#1%index << (__=empty < (/^-NONE-/ < /^\*T\*-([0-9]+)$/#1%index))' 
 
-$ echo "$tree" | tregex.sh "$pattern" -filter 2>/dev/null
+$ echo "$tree" | java edu.stanford.nlp.trees.tregex.TregexPattern "$pattern" -filter 2>/dev/null
 # (SBAR
 #   (WHNP-11 (WP who))
 #   (S
