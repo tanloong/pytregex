@@ -6,8 +6,10 @@ import warnings
 
 
 def explain(term):
-    if term in GLOSSARY:
-        return GLOSSARY[term]
+    if term is None:
+        yield from GLOSSARY.values()
+    elif term in GLOSSARY:
+        yield GLOSSARY[term]
     else:
         warnings.warn(f"Term '{term}' not found in glossary.", stacklevel=1)
 

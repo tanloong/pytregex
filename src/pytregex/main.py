@@ -195,14 +195,10 @@ class TregexUI:
         return True, None
 
     def run_explain_args(self, options: argparse.Namespace) -> TregexProcedureResult:
-        if options.relop is None:
-            self.explain_parser.print_help()
-            return True, None
-
         from .glossary import explain
 
         with contextlib.suppress(BrokenPipeError):
-            if (ret := explain(options.relop)) is not None:
+            for ret in explain(options.relop):
                 sys.stdout.write(f"{ret}\n")
         return True, None
 
