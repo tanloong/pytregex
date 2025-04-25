@@ -341,6 +341,14 @@ class Tree:
         # translated from CoreNLP's PennTreeReader
         # https://github.com/stanfordnlp/CoreNLP/blob/main/src/edu/stanford/nlp/trees/PennTreeReader.java#L144
 
+        def remove_extra_level(root) -> "Tree":
+            # get rid of extra levels of root with None label
+            # e.g.: "((S (NP ...) (VP ...)))" -> "S (NP ...) (VP ...)"
+            while root.label is None and len(root.children) == 1:
+                root = root.children[0]
+                root.parent = None
+            return root
+
         open_pattern = re.escape(LRB)
         close_pattern = re.escape(RRB)
 
@@ -381,7 +389,7 @@ class Tree:
                     current_tree = stack_parent.pop()
 
                     if len(stack_parent) == 0:
-                        yield cls._remove_extra_level(current_tree)
+                        yield remove_extra_level(current_tree)
 
                         current_tree = None
                         continue
@@ -394,15 +402,6 @@ class Tree:
 
         if current_tree is not None:
             raise ValueError("incomplete tree (extra left parentheses in input)")
-
-    @classmethod
-    def _remove_extra_level(cls, root) -> "Tree":
-        # get rid of extra levels of root with None label
-        # e.g.: "((S (NP ...) (VP ...)))" -> "S (NP ...) (VP ...)"
-        while root.label is None and len(root.children) == 1:
-            root = root.children[0]
-            root.parent = None
-        return root
 
     def getRoot(self) -> "Tree":
         root_ = self
